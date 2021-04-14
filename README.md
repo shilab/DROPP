@@ -25,5 +25,5 @@ source venv/bin/activate
 ```
 Install requirment dependents
 ```
-pip3 install scipy sklearn pandas jupyter matplotlib scikit-allel
+pip3 install scipy sklearn pandas jupyter matplotlib seaborn scikit-allel
 ```
