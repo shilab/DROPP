@@ -269,10 +269,10 @@ def doIt(phenoIndex=0, genotype_file='genotype_full.txt', phenotype_file = 'phen
             with open(f"./outG{exp}_{LD_threshold}/" + filePrefixName +  f"_LD_{LD_threshold}_log_"
                       + '.csv', 'a', encoding='utf-8') as csvfile:
                 spamwriter = csv.writer(csvfile, quoting=csv.QUOTE_MINIMAL)
-                spamwriter.writerow([NOG, percentage, tAcc2, tMSE2, totalSeconds.total_seconds(), gene_selector.Beta])
+                spamwriter.writerow([NOG, percentage, tAcc2, tMSE2, totalSeconds.total_seconds()])
 
             bestGenes = trainWordScores
-            bestStats = [NOG, percentage, tAcc2, tMSE2, totalSeconds.total_seconds(), gene_selector.Beta]
+            bestStats = [NOG, percentage, tAcc2, tMSE2, totalSeconds.total_seconds()]
 
         
         if timeLimit:
@@ -380,8 +380,6 @@ if __name__ == '__main__':
     # parser.add_argument('-di', type=str, help='Path to the folder containing input dataset')
     parser.add_argument('-pi', type=int, help='Phenotype Index to run the code on (default=2)', default=0)
     parser.add_argument('-np', type=int, help='Number of processes (default=5)', default=5)
-    # parser.add_argument('-a', type=float, help='Alpha (default=1e-1)', default=1e-1)
-    # parser.add_argument('-b', type=float, help='Beta (default=1e-3)', default=1e-3)
     # parser.add_argument('-fname', type=str, help='Filter Name FISHER | IG | PearsonCC (default=PearsonCC)',
     #                     choices=['IG', 'FISHER', 'PearsonCC'], default='PearsonCC')
     args = parser.parse_args()
@@ -407,7 +405,7 @@ if __name__ == '__main__':
                 with open(f"./outG{exp}_{LD_threshold}/" + '_' + phenoName + f"_LD_{LD_threshold}_log_" + '_featureBound_' + str(feature_bound) + "_"
                           + '.csv', 'a', encoding='utf-8') as csvfile:
                     spamwriter = csv.writer(csvfile, quoting=csv.QUOTE_MINIMAL)
-                    spamwriter.writerow(['Round', "FilterName", 'Alpha', "Beta", "NOF",
+                    spamwriter.writerow(['Round', "FilterName", "NOF",
                                          "Acc", "TACC", "TMSE", "TotalSecs"])
 
                 doIt(phenoIndex=phenoIndex, genotype_file=genotype_file, phenotype_file=phenotype_file, n_process=n_process, LD_threshold=LD_threshold,
