@@ -4,7 +4,7 @@ This repository holds the source code for "Mowlaei, M. E., Shi, X.: DROPP: Dimen
 
 ## DROPP framework:
 Dimensionality ReductionOperated Phenotype Prediction (DROPP)Phenotype prediction involves solving two problems, namely epistatic interactionsamong loci and curse of dimensionality. To address the latter, we propose DROPP in order to reduce the search space for effective SNPs in phenotype prediction. While our method does not directly address the epistasis detection problem, it can be used as a prior step in order to solve the aforementioned problem. Our motivation andmethod will be described in the following. The overall pipeline used in this study isillustrated below:
-![Overal Pipeline](https://github.com/shilab/DROPP/blob/b58a3ec411e4297bb8f2d8e47b4d97b7bdbfba3f/Figure%204.pdf)
+![Overal Pipeline](https://github.com/shilab/DROPP/blob/19e112db57b2ed4faa3da487d7a1d648cb14281d/assets/Figure%204.png)
 As a side note, henceforth, we will be using loci and featuresinterchangeably.The  dataset  is  first  partitioned  into  training  and  test  sets.  Afterwards,  pre-processing  is  applied  to  both  sets,  restricting  features  that  will  be  used  for  theGA in the next step. In the GA, we aim to find the optimal set of features thatmaximize our criteria, namelyR2Adj, on the training set.Aregressionmodelisthenfitonthetestsetusingtheselectedsubsetoffeaturesandweevaluatetheperfor-manceusingthismodel.SelectedfeaturescandependontheregressionmodelusedinthefitnessfunctionoftheGA;however,thefinaloutputoftheGAisthesetofthefeatures. Since GA is a stochastic algorithm, we run it more than once andconsider the overlap of produced sets as the final output.
 ## Getting Started:
 
