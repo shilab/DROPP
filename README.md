@@ -31,10 +31,23 @@ where *RSS* is the sum of squares of residuals and *TSS* is total sum of squares
 
 ### Pre-processing
 
-The purpose of GA in our approach is to find the minimum set of the features, for each trait, that delivers the best prediction power. However, evolutionary algorithms alone cannot prioritize suitable features, resulting in extremely long run-times until convergence. In order to guide our GA, we first mark valid SNPs for each trait and our GA is only allowed to use them in order to form the output set of the features. To do so, we make use of LD between SNP pairs and Pearson Correlation Coefficients among each SNP and the target trait. LD between SNP pairs is calculated using Python *scikit-allel* package. The code for pre-processing can be found at:
+The purpose of GA in our approach is to find the minimum set of the features, for each trait, that delivers the best prediction power. However, evolutionary algorithms alone cannot prioritize suitable features, resulting in extremely long run-times until convergence. In order to guide our GA, we first mark valid SNPs for each trait and our GA is only allowed to use them in order to form the output set of the features. To do so, we make use of LD between SNP pairs and Pearson Correlation Coefficients among each SNP and the target trait. LD between SNP pairs is calculated using Python *scikit-allel* package. The code for pre-processing can be found at Main.py:
 
 https://github.com/shilab/DROPP/blob/096614014fe9a002be121980e21d31d5ad4bb0fd/Main.py#L82-L99
 
+### The Genetic Algorithm
+
+In this section, we present the details of our GA. The inputs to our GA are the training set and valid feature indices acquired by the pre-processing step. The output is the set of selected SNPs that give the optimal result for predicting the phenotype of interest. Since randomness in evolutionary algorithms is inevitable, specially in this problem, we run the GA three times and use the intersection of outputs as the final set, for each setting. 
+	
+The building blocks of each GA are chromosomes and three functions named *fitness* , *mutate* , and *crossover*. The overall process of the proposed GA is illustrated below:
+
+<p align="center">
+  <img width="460" height="auto" src="https://github.com/shilab/DROPP/blob/a194c2d303e7da1b6b8c247eb194b7bd689543d3/assets/Figure%204.png">
+</p>
+
+In our algorithm, each chromosome contains a vector of binary values (1/0) called *genes*. In other terms, genes is referred to the parameters of the solutions in our problem, this should not be confused with the concept of genes in genetics, and through this paper, we use gene(s) only in context of GA. The length of each array is equal to the number of loci in genotypes. Setting each element in these arrays to 1/0 indicates that the corresponding feature should be used/discarded in the respective data subset. In other terms, these arrays mask the presence of features in the dataset. The *fitness* function in the proposed GA simply calculates *fitness score* on the training set, that is, <img src="https://render.githubusercontent.com/render/math?math=R_{\text{Adj}}^2"> in this study, using Bayesian Ridge regressor implementation from *Scikit-learn* package. The key to selecting the model for the *fitness* function is that it should not have inherent *L1* penalty (e.g. Lasso), so that redundant features affect model performance are removed in the process. Tabu Search (TS) is incorporated into our GA in order to improve local search and prohibiting it from re-checking previously-visited solutions. Furthermore, TS can save time by preventing redundant calculations in the *fitness* function.
+
+The *mutate* function takes a chromosome and modifies its genes, exploring the search space for the global optimum. <cite><a href="https://github.com/shilab/DROPP/blob/a194c2d303e7da1b6b8c247eb194b7bd689543d3/GeneSelector.py#L63-L91">Mutate function</a></cite> contains the code for the *mutate* function. The inputs of *crossover* function are two chromosomes, named parents $G_P$, $G_D$, their respective fitness scores, and *fitness* function. Generally speaking, in GA, crossover operation combines two sets of genes, resulting in a new chromosome, named child ($G_C$), in which genes are inherited from either of parents --performing exploitation and leading to convergence in search subspace. The same is applied in our *crossover* function. The pseudo-code of *crossover* function is presented in \Cref{alg:crossover}.
 
 ## Getting Started:
 
