@@ -31,9 +31,8 @@ where *RSS* is the sum of squares of residuals and *TSS* is total sum of squares
 
 ### Pre-processing
 
-The purpose of GA in our approach is to find the minimum set of the features, for each trait, that delivers the best prediction power. However, evolutionary algorithms alone cannot prioritize suitable features, resulting in extremely long run-times until convergence. In order to guide our GA, we first mark valid SNPs for each trait and our GA is only allowed to use them in order to form the output set of the features. To do so, we make use of LD between SNP pairs and Pearson Correlation Coefficients among each SNP and the target trait. LD between SNP pairs is calculated using Python *scikit-allel* package. The code for pre-processing can be found at Main.py:
+The purpose of GA in our approach is to find the minimum set of the features, for each trait, that delivers the best prediction power. However, evolutionary algorithms alone cannot prioritize suitable features, resulting in extremely long run-times until convergence. In order to guide our GA, we first mark valid SNPs for each trait and our GA is only allowed to use them in order to form the output set of the features. To do so, we make use of LD between SNP pairs and Pearson Correlation Coefficients among each SNP and the target trait. LD between SNP pairs is calculated using Python *scikit-allel* package. The code for pre-processing can be found at <cite><a href="https://github.com/shilab/DROPP/blob/096614014fe9a002be121980e21d31d5ad4bb0fd/Main.py#L82-L99">Main.py</a></cite>:
 
-https://github.com/shilab/DROPP/blob/096614014fe9a002be121980e21d31d5ad4bb0fd/Main.py#L82-L99
 
 ### The Genetic Algorithm
 
