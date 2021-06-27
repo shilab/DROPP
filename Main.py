@@ -378,14 +378,16 @@ def doIt(phenoIndex=0, genotype_file='genotype_full.txt', phenotype_file = 'phen
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='ShiLab\'s GA model for gene selection')
     # parser.add_argument('-di', type=str, help='Path to the folder containing input dataset')
-    parser.add_argument('-pi', type=int, help='Phenotype Index to run the code on (default=2)', default=0)
+    parser.add_argument('-pi', type=int, help='Phenotype Index to run the code on (default=0)', default=0)
     parser.add_argument('-np', type=int, help='Number of processes (default=5)', default=5)
+    parser.add_argument('-ldt', type=int, help='LD_threshold (default=0.2)', default=0.2)
     # parser.add_argument('-fname', type=str, help='Filter Name FISHER | IG | PearsonCC (default=PearsonCC)',
     #                     choices=['IG', 'FISHER', 'PearsonCC'], default='PearsonCC')
     args = parser.parse_args()
 
-    phenoIndex = args.pi# if args.pi else 2
-    n_process = args.np# if args.np else 8
+    phenoIndex = args.pi
+    n_process = args.np
+    LD_threshold = args.ldt
     # IGorF = args.fname# if args.fname else "FISHER"
 
     maxSeconds = 60 * 60 * 24  # Max GA runtime
@@ -395,18 +397,15 @@ if __name__ == '__main__':
     genotype_file = '../data/genotype_full.txt'
     phenotype_file = '../data/phenotype.csv'
 
-    for exp in range(1):
-        for LD_threshold in [0.2, 0.3, 0.4, 0.5]:
-            for phenoIndex in [0, 1, 2, 3, 4]:
-                phenos = pd.read_csv(phenotype_file, sep=',', index_col=0, nrows=2)
-                phenoName = phenos.columns[phenoIndex]
+    phenos = pd.read_csv(phenotype_file, sep=',', index_col=0, nrows=2)
+    phenoName = phenos.columns[phenoIndex]
 
-                Path(f"outG{exp}_{LD_threshold}").mkdir(parents=True, exist_ok=True)
-                with open(f"./outG{exp}_{LD_threshold}/" + '_' + phenoName + f"_LD_{LD_threshold}_log_" + '_featureBound_' + str(feature_bound) + "_"
-                          + '.csv', 'a', encoding='utf-8') as csvfile:
-                    spamwriter = csv.writer(csvfile, quoting=csv.QUOTE_MINIMAL)
-                    spamwriter.writerow(['Round', "FilterName", "NOF",
-                                         "Acc", "TACC", "TMSE", "TotalSecs"])
+    Path(f"outG{exp}_{LD_threshold}").mkdir(parents=True, exist_ok=True)
+    with open(f"./outG{exp}_{LD_threshold}/" + '_' + phenoName + f"_LD_{LD_threshold}_log_" + '_featureBound_' + str(feature_bound) + "_"
+              + '.csv', 'a', encoding='utf-8') as csvfile:
+        spamwriter = csv.writer(csvfile, quoting=csv.QUOTE_MINIMAL)
+        spamwriter.writerow(['Round', "FilterName", "NOF",
+                             "Acc", "TACC", "TMSE", "TotalSecs"])
 
-                doIt(phenoIndex=phenoIndex, genotype_file=genotype_file, phenotype_file=phenotype_file, n_process=n_process, LD_threshold=LD_threshold,
-                     totalRounds=totalRounds, maxSeconds=maxSeconds, feature_bound=feature_bound, exp=exp)
+    doIt(phenoIndex=phenoIndex, genotype_file=genotype_file, phenotype_file=phenotype_file, n_process=n_process, LD_threshold=LD_threshold,
+         totalRounds=totalRounds, maxSeconds=maxSeconds, feature_bound=feature_bound, exp=exp)
