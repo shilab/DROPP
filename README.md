@@ -1,4 +1,4 @@
-# DROPP: Dimensionality Reduction OrientedPhenotype Prediction Using Genetic Algorithms
+# DROPP: Dimensionality Reduction Oriented Phenotype Prediction Using Genetic Algorithms
 
 This repository holds the source code for "Mowlaei, M. E., Shi, X.: DROPP: Dimensionality Reduction Operated Phenotype Prediction Framework Using Genetic Algorithms" manuscript, accepted at ICIBM2021. DROPP is a bi-objective framwork, designed to perform phenotype prediction and QTL detection. The main code resides in the Main.py file. The results reported in the paper are stored in experimentResults.zip as comma seperated (CSV) files. Overlap_Cheker.ipynb contains codes used for detecting overlap of QTLs between our results and previous research, as well as LD concordance calculations.
 
