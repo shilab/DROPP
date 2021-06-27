@@ -394,8 +394,8 @@ if __name__ == '__main__':
     totalRounds = 3
     feature_bound = 7
 
-    genotype_file = '../data/genotype_full.txt'
-    phenotype_file = '../data/phenotype.csv'
+    genotype_file = 'data/genotype_full.txt'
+    phenotype_file = 'data/phenotype.csv'
 
     phenos = pd.read_csv(phenotype_file, sep=',', index_col=0, nrows=2)
     phenoName = phenos.columns[phenoIndex]
