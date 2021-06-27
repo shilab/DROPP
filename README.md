@@ -6,7 +6,7 @@ This repository holds the source code for "Mowlaei, M. E., Shi, X.: DROPP: Dimen
 Dimensionality ReductionOperated Phenotype Prediction (DROPP)Phenotype prediction involves solving two problems, namely epistatic interactionsamong loci and curse of dimensionality. To address the latter, we propose DROPP in order to reduce the search space for effective SNPs in phenotype prediction. While our method does not directly address the epistasis detection problem, it can be used as a prior step in order to solve the aforementioned problem. Our motivation andmethod will be described in the following. The overall pipeline used in this study isillustrated below:
 
 <p align="center">
-  <img width="460" height="300" src="https://github.com/shilab/DROPP/blob/3fdca0252e373ffe5194a2aa9bb0a07762a3f80e/assets/Figure%203.png">
+  <img width="460" height="auto" src="https://github.com/shilab/DROPP/blob/3fdca0252e373ffe5194a2aa9bb0a07762a3f80e/assets/Figure%203.png">
 </p>
 
 
