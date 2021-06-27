@@ -29,6 +29,13 @@ where *p* is number of independent features selected for training the model, *n*
 
 where *RSS* is the sum of squares of residuals and *TSS* is total sum of squares for a given trait. <img src="https://render.githubusercontent.com/render/math?math=R_{\text{Adj}}^2">  and <img src="https://render.githubusercontent.com/render/math?math=R^{2}"> range from 0 to 1, with 1/0 being the best/worst value. We set maximizing <img src="https://render.githubusercontent.com/render/math?math=R_{\text{Adj}}^2"> and minimizing the number of features as primary and secondary objectives in our GA, respectively. In other terms, our optimization algorithm maximizes <img src="https://render.githubusercontent.com/render/math?math=R_{\text{Adj}}^2"> of phenotype prediction using as few features as possible.
 
+### Pre-processing
+
+The purpose of GA in our approach is to find the minimum set of the features, for each trait, that delivers the best prediction power. However, evolutionary algorithms alone cannot prioritize suitable features, resulting in extremely long run-times until convergence. In order to guide our GA, we first mark valid SNPs for each trait and our GA is only allowed to use them in order to form the output set of the features. To do so, we make use of LD between SNP pairs and Pearson Correlation Coefficients among each SNP and the target trait. LD between SNP pairs is calculated using Python *scikit-allel* package. The code for pre-processing can be found at:
+
+https://github.com/shilab/DROPP/blob/096614014fe9a002be121980e21d31d5ad4bb0fd/Main.py#L82-L99
+
+
 ## Getting Started:
 
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. 
