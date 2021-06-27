@@ -10,7 +10,7 @@ Dimensionality Reduction Operated Phenotype Prediction (DROPP) Phenotype predict
 </p>
 
 
-The dataset is first partitioned into training and test sets. Afterwards, pre-processing is applied to both sets, restricting features that will be  used for the GA in the next step. In the GA, we aim to find the optimal set of features that maximize our criteria, namely <img src="https://render.githubusercontent.com/render/math?math=R_{\text{\scriptsize Adj}}^2">, on the training set. A regression model is then fit on the test set using the selected subset of features and we evaluate the performance using this model. Selected features can depend on the regression model used in the fitness function of the GA; however, the final output of the GA is the set of the features. Since GA is a stochastic algorithm, we run it more than once and consider the overlap of produced sets as the final output.
+The dataset is first partitioned into training and test sets. Afterwards, pre-processing is applied to both sets, restricting features that will be  used for the GA in the next step. In the GA, we aim to find the optimal set of features that maximize our criteria, namely <img src="https://render.githubusercontent.com/render/math?math=R_{\text{Adj}}^2">, on the training set. A regression model is then fit on the test set using the selected subset of features and we evaluate the performance using this model. Selected features can depend on the regression model used in the fitness function of the GA; however, the final output of the GA is the set of the features. Since GA is a stochastic algorithm, we run it more than once and consider the overlap of produced sets as the final output.
 
 ### The Optimization Problem
 
@@ -18,16 +18,16 @@ GA is a nature-inspired method and a major constitution of Computational Intelli
 	
 In this study, given a certain regression model *M* and a dataset *D*, we look for the minimal subset of SNPs in *D* that provides us the best phenotype prediction results, as our goal. The normal procedure for stopping a GA, in case the optimal goal is not met, includes (but is not limited to) setting time limit on the runtime of the algorithm or the number of iterations. Here, we employ the latter and set maximum number of iterations to 5000.
 
-There are a limited number of metrics used for regression problems. Among them, MSE is commonly used as a measure to compare different methods. However, through empirical study we found out that <img src="https://render.githubusercontent.com/render/math?math=R_{\text{\scriptsize Adj}}^2">, serves as a better objective for the task at hand. This metric can be calculated as follows:
+There are a limited number of metrics used for regression problems. Among them, MSE is commonly used as a measure to compare different methods. However, through empirical study we found out that <img src="https://render.githubusercontent.com/render/math?math=R_{\text{Adj}}^2">, serves as a better objective for the task at hand. This metric can be calculated as follows:
 
-<img src="https://render.githubusercontent.com/render/math?math=R_{\text{\scriptsize Adj}}^2 = 1 - \dfrac{(1-R^2) (n - 1)}{n-p-1};">
+<img src="https://render.githubusercontent.com/render/math?math=R_{\text{Adj}}^2 = 1 - \dfrac{(1-R^2) (n - 1)}{n-p-1};">
 
 where *p* is number of independent features selected for training the model, *n* is the number of samples, and <img src="https://render.githubusercontent.com/render/math?math=R^{2}"> is calculated as below:
 
 <img src="https://render.githubusercontent.com/render/math?math=R^{2} = 1 - \dfrac{RSS}{TSS}">
 
 
-where *RSS* is the sum of squares of residuals and *TSS* is total sum of squares for a given trait. <img src="https://render.githubusercontent.com/render/math?math=R_{\text{\scriptsize Adj}}^2">  and <img src="https://render.githubusercontent.com/render/math?math=R^{2}"> range from 0 to 1, with 1/0 being the best/worst value. We set maximizing <img src="https://render.githubusercontent.com/render/math?math=R_{\text{\scriptsize Adj}}^2"> and minimizing the number of features as primary and secondary objectives in our GA, respectively. In other terms, our optimization algorithm maximizes <img src="https://render.githubusercontent.com/render/math?math=R_{\text{\scriptsize Adj}}^2"> of phenotype prediction using as few features as possible.
+where *RSS* is the sum of squares of residuals and *TSS* is total sum of squares for a given trait. <img src="https://render.githubusercontent.com/render/math?math=R_{\text{Adj}}^2">  and <img src="https://render.githubusercontent.com/render/math?math=R^{2}"> range from 0 to 1, with 1/0 being the best/worst value. We set maximizing <img src="https://render.githubusercontent.com/render/math?math=R_{\text{Adj}}^2"> and minimizing the number of features as primary and secondary objectives in our GA, respectively. In other terms, our optimization algorithm maximizes <img src="https://render.githubusercontent.com/render/math?math=R_{\text{Adj}}^2"> of phenotype prediction using as few features as possible.
 
 ## Getting Started:
 
