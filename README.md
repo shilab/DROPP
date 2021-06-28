@@ -90,7 +90,7 @@ pip3 install scipy sklearn pandas jupyter matplotlib seaborn scikit-allel
 You can simply run the code by opening a terminal in working directory and entering the following command:
 
 ```
-.../\<DROPP-main\>$python3 Main.py -pi [Phenotype Index] -ldt [LD cutoff Threshold]
+.../<DROPP-main>$python3 Main.py -pi [Phenotype Index] -ldt [LD cutoff Threshold]
 ```
 
 The dataset should be partitioned into genotype and phenotype parts, and the path of these files should be set at <cite><a href="https://github.com/shilab/DROPP/blob/75df9384794f0c56c0b84ea3c03cbf4eb6866fb1/Main.py#L397-L398">Main.py</a></cite>.
