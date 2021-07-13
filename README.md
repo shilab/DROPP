@@ -1,9 +1,9 @@
-# DROPP: Dimensionality Reduction Oriented Phenotype Prediction Using Genetic Algorithms
+# FSF-GA: A Feature Selection Framework for Phenotype Prediction Using Genetic Algorithm
 
-This repository holds the source code for "Mowlaei, M. E., Shi, X.: DROPP: Dimensionality Reduction Operated Phenotype Prediction Framework Using Genetic Algorithms" manuscript, accepted at ICIBM2021. DROPP is a bi-objective framwork, designed to perform phenotype prediction and QTL detection. The main code resides in the Main.py file. The results reported in the paper are stored in experimentResults.zip as comma seperated (CSV) files. Overlap_Cheker.ipynb contains codes used for detecting overlap of QTLs between our results and previous research, as well as LD concordance calculations.
+This repository holds the source code for "Mowlaei, M. E., Shi, X.: FSF-GA: A Feature Selection Framework for Phenotype Prediction Using Genetic Algorithm" manuscript, accepted at ICIBM2021. FSF-GA is a bi-objective framwork, designed to perform phenotype prediction and QTL detection. The main code resides in the Main.py file. The results reported in the paper are stored in experimentResults.zip as comma seperated (CSV) files. Overlap_Cheker.ipynb contains codes used for detecting overlap of QTLs between our results and previous research, as well as LD concordance calculations.
 
-## DROPP framework:
-Dimensionality Reduction Operated Phenotype Prediction (DROPP) Phenotype prediction involves solving two problems, namely epistatic interactionsamong loci and curse of dimensionality. To address the latter, we propose DROPP in order to reduce the search space for effective SNPs in phenotype prediction. While our method does not directly address the epistasis detection problem, it can be used as a prior step in order to solve the aforementioned problem. Our motivation and method will be described in the following. The overall pipeline used in this study is illustrated below:
+## FSF-GA framework:
+Feature Selection Framework for Phenotype Prediction Using Genetic Algorithm (FSF-GA) Phenotype prediction involves solving two problems, namely epistatic interactionsamong loci and curse of dimensionality. To address the latter, we propose FSF-GA in order to reduce the search space for effective SNPs in phenotype prediction. While our method does not directly address the epistasis detection problem, it can be used as a prior step in order to solve the aforementioned problem. Our motivation and method will be described in the following. The overall pipeline used in this study is illustrated below:
 
 <p align="center">
   <img width="460" height="auto" src="https://github.com/shilab/DROPP/blob/3fdca0252e373ffe5194a2aa9bb0a07762a3f80e/assets/Figure%203.png">
