@@ -31,7 +31,7 @@ where *RSS* is the sum of squares of residuals and *TSS* is total sum of squares
 
 ### Pre-processing
 
-The purpose of GA in our approach is to find the minimum set of the features, for each trait, that delivers the best prediction power. However, evolutionary algorithms alone cannot prioritize suitable features, resulting in extremely long run-times until convergence. In order to guide our GA, we first mark valid SNPs for each trait and our GA is only allowed to use them in order to form the output set of the features. To do so, we make use of LD between SNP pairs and Pearson Correlation Coefficients among each SNP and the target trait. LD between SNP pairs is calculated using Python *scikit-allel* package. The code for pre-processing can be found at <cite><a href="https://github.com/shilab/DROPP/blob/096614014fe9a002be121980e21d31d5ad4bb0fd/Main.py#L82-L99">Main.py</a></cite>:
+The purpose of GA in our approach is to find the minimum set of the features, for each trait, that delivers the best prediction power. However, evolutionary algorithms alone cannot prioritize suitable features, resulting in extremely long run-times until convergence. In order to guide our GA, we first mark valid SNPs for each trait and our GA is only allowed to use them in order to form the output set of the features. To do so, we make use of LD between SNP pairs and Pearson Correlation Coefficients among each SNP and the target trait. LD between SNP pairs is calculated using Python *scikit-allel* package. The code for pre-processing can be found at <cite><a href="https://github.com/shilab/FSF-GA/blob/096614014fe9a002be121980e21d31d5ad4bb0fd/Main.py#L82-L99">Main.py</a></cite>:
 
 
 ### The Genetic Algorithm
@@ -41,18 +41,18 @@ In this section, we present the details of our GA. The inputs to our GA are the 
 The building blocks of each GA are chromosomes and three functions named *fitness* , *mutate* , and *crossover*. The overall process of the proposed GA is illustrated below:
 
 <p align="center">
-  <img width="460" height="auto" src="https://github.com/shilab/DROPP/blob/a194c2d303e7da1b6b8c247eb194b7bd689543d3/assets/Figure%204.png">
+  <img width="460" height="auto" src="https://github.com/shilab/FSF-GA/blob/a194c2d303e7da1b6b8c247eb194b7bd689543d3/assets/Figure%204.png">
 </p>
 
 In our algorithm, each chromosome contains a vector of binary values (1/0) called *genes*. In other terms, genes is referred to the parameters of the solutions in our problem, this should not be confused with the concept of genes in genetics, and through this paper, we use gene(s) only in context of GA. The length of each array is equal to the number of loci in genotypes. Setting each element in these arrays to 1/0 indicates that the corresponding feature should be used/discarded in the respective data subset. In other terms, these arrays mask the presence of features in the dataset, as demonstrated below:
 
 <p align="center">
-  <img width="510" height="auto" src="https://github.com/shilab/DROPP/blob/515c9f7bcfef96becb3d905ffc8609877c96f507/assets/Figure%205.png">
+  <img width="510" height="auto" src="https://github.com/shilab/FSF-GA/blob/515c9f7bcfef96becb3d905ffc8609877c96f507/assets/Figure%205.png">
 </p>
 
 The *fitness* function in the proposed GA simply calculates *fitness score* on the training set, that is, <img src="https://render.githubusercontent.com/render/math?math=R_{\text{Adj}}^2"> in this study, using Bayesian Ridge regressor implementation from *Scikit-learn* package. The key to selecting the model for the *fitness* function is that it should not have inherent *L1* penalty (e.g. Lasso), so that redundant features affect model performance are removed in the process. Tabu Search (TS) is incorporated into our GA in order to improve local search and prohibiting it from re-checking previously-visited solutions. Furthermore, TS can save time by preventing redundant calculations in the *fitness* function.
 
-The *mutate* function takes a chromosome and modifies its genes, exploring the search space for the global optimum. <cite><a href="https://github.com/shilab/DROPP/blob/a194c2d303e7da1b6b8c247eb194b7bd689543d3/GeneSelector.py#L63-L91">Mutate function</a></cite> contains the code for the *mutate* function. The inputs of *crossover* function are two chromosomes, named parents <img src="https://render.githubusercontent.com/render/math?math=(G_P, G_D)">, their respective fitness scores, and *fitness* function. Generally speaking, in GA, crossover operation combines two sets of genes, resulting in a new chromosome, named child <img src="https://render.githubusercontent.com/render/math?math=G_C">, in which genes are inherited from either of parents --performing exploitation and leading to convergence in search subspace. The same is applied in our *crossover* function. The source code of *crossover* function is can be found at <cite><a href="https://github.com/shilab/DROPP/blob/a194c2d303e7da1b6b8c247eb194b7bd689543d3/GeneSelector.py#L94-L117">Crossover function</a></cite>.
+The *mutate* function takes a chromosome and modifies its genes, exploring the search space for the global optimum. <cite><a href="https://github.com/shilab/DROPP/blob/a194c2d303e7da1b6b8c247eb194b7bd689543d3/GeneSelector.py#L63-L91">Mutate function</a></cite> contains the code for the *mutate* function. The inputs of *crossover* function are two chromosomes, named parents <img src="https://render.githubusercontent.com/render/math?math=(G_P, G_D)">, their respective fitness scores, and *fitness* function. Generally speaking, in GA, crossover operation combines two sets of genes, resulting in a new chromosome, named child <img src="https://render.githubusercontent.com/render/math?math=G_C">, in which genes are inherited from either of parents --performing exploitation and leading to convergence in search subspace. The same is applied in our *crossover* function. The source code of *crossover* function is can be found at <cite><a href="https://github.com/shilab/FSF-GA/blob/a194c2d303e7da1b6b8c247eb194b7bd689543d3/GeneSelector.py#L94-L117">Crossover function</a></cite>.
 
 The base code of our GA is adopted from <cite><a href="https://github.com/handcraftsman/GeneticAlgorithmsWithPython">Genetic Algorithms with Python</a></cite>. However, as mentioned above, the code was heavily modified. The size of parent pool in our GA is set to 10. The rate of mutation and crossover is set dynamically according to the last 3 improvement. However, we have designed the algorithm so that mutation/crossover rate cannot fall under 20\%, and in each turn, only one of these operations is performed on each chromosome. For instance, if 2 out of 3 last improvements are resulted from crossover, then the next function to apply on the next chromosomes, until the next improvement is found, are crossover/mutation with a probability of 60/40\%.
 	
@@ -74,8 +74,8 @@ Jupyter notebook 6.1.5
 Create virtual environment
 
 ```
-git clone https://github.com/shilab/DROPP.git
-cd DROPP
+git clone https://github.com/shilab/FSF-GA.git
+cd FSF-GA
 mkdir venv
 python3 -m venv venv/
 source venv/bin/activate
@@ -90,7 +90,7 @@ pip3 install scipy sklearn pandas jupyter matplotlib seaborn scikit-allel
 You can simply run the code by opening a terminal in working directory and entering the following command:
 
 ```
-.../<DROPP-main>$python3 Main.py -pi [Phenotype Index] -ldt [LD cutoff Threshold]
+.../<FSF-GA>$python3 Main.py -pi [Phenotype Index] -ldt [LD cutoff Threshold]
 ```
 
 The dataset should be partitioned into genotype and phenotype parts, and the path of these files should be set at <cite><a href="https://github.com/shilab/DROPP/blob/75df9384794f0c56c0b84ea3c03cbf4eb6866fb1/Main.py#L397-L398">Main.py</a></cite>.
