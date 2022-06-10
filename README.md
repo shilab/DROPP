@@ -20,7 +20,7 @@ In this study, given a certain regression model *M* and a dataset *D*, we look f
 
 There are a limited number of metrics used for regression problems. Among them, MSE is commonly used as a measure to compare different methods. However, through empirical study we found out that <img src="https://render.githubusercontent.com/render/math?math=R_{\text{Adj}}^2">, serves as a better objective for the task at hand. This metric can be calculated as follows:
 
-<img src="https://render.githubusercontent.com/render/math?math=R_{\text{Adj}}^2 = 1 - \dfrac{(1-R^2) (n - 1)}{n-p-1};">
+$$R_{\text{Adj}}^2 = 1 - \dfrac{(1-R^2) (n - 1)}{n-p-1};$$
 
 where *p* is number of independent features selected for training the model, *n* is the number of samples, and <img src="https://render.githubusercontent.com/render/math?math=R^{2}"> is calculated as below:
 
