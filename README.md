@@ -24,7 +24,7 @@ $$R_{\text{Adj}}^2 = 1 - \dfrac{(1-R^2) (n - 1)}{n-p-1};$$
 
 where *p* is number of independent features selected for training the model, *n* is the number of samples, and $R^{2}$ is calculated as below:
 
-$R^{2} = 1 - \dfrac{RSS}{TSS}$
+$$R^{2} = 1 - \dfrac{RSS}{TSS};$$
 
 
 where *RSS* is the sum of squares of residuals and *TSS* is total sum of squares for a given trait. $R_{\text{Adj}}^2$  and $R^{2}$ range from 0 to 1, with 1/0 being the best/worst value. We set maximizing $R_{\text{Adj}}^2$ and minimizing the number of features as primary and secondary objectives in our GA, respectively. In other terms, our optimization algorithm maximizes $R_{\text{Adj}}^2$ of phenotype prediction using as few features as possible.
