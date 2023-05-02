@@ -393,6 +393,7 @@ if __name__ == '__main__':
     maxSeconds = 60 * 60 * 24  # Max GA runtime
     totalRounds = 3
     feature_bound = 7
+    exp = 1
 
     genotype_file = 'data/genotype_full.txt'
     phenotype_file = 'data/phenotype.csv'
